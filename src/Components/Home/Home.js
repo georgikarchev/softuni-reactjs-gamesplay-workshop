@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as gameService from "../../Services/gameService";
 import { LatestGame } from "./LatestGame/LatestGame";
 
-export const Home = () => {
+const Home = () => {
 
   const [ games, setGames ] = useState([]);
 
@@ -32,3 +32,5 @@ export const Home = () => {
     </section>
   );
 };
+
+export default Home;
