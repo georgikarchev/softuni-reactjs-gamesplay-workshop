@@ -1,4 +1,4 @@
-export const Edit = () => {
+export const EditGame = () => {
   return (
     <section id="edit-page" className="auth">
       <form id="edit">

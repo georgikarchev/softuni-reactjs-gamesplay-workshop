@@ -5,8 +5,8 @@ import { Header } from "./Components/Header/Header";
 import { Login } from "./Components/Login/Login";
 // import { Logout } from "./Components/Logout/Logout";
 import { Register } from "./Components/Register/Register";
-import { Edit } from "./Components/Edit/Edit";
-import { Create } from "./Components/Create/Create";
+import { EditGame } from "./Components/EditGame/EditGame";
+import { CreateGame } from "./Components/CreateGame/CreateGame";
 import { Catalogue } from "./Components/Catalogue/Catalogue";
 
  
@@ -23,8 +23,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           {/* <Route path="/logout" element={<Logout />} /> */}
           <Route path="/register" element={<Register />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/edit" element={<Edit />} />
+          <Route path="/create" element={<CreateGame />} />
+          <Route path="/edit" element={<EditGame />} />
           <Route path="/catalogue" element={<Catalogue />} />
         </Routes>
         
