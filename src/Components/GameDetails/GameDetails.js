@@ -1,10 +1,28 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-export const GameDetails = ({ games }) => {
-    const { gameId } = useParams();
+export const GameDetails = ({ games, addComment }) => {
+  const { gameId } = useParams();
+  const [comment, setComment] = useState({
+    username: "",
+    comment: "",
+  });
 
-    // The better way here is to make a get request to the server and get the game information
-    const game = games.find( x => x._id == gameId );
+  // The better way here is to make a get request to the server and get the game information
+  const game = games.find((x) => x._id == gameId);
+
+  const addCommentHandler = (e) => {
+    e.preventDefault();
+    console.log(comment);
+    addComment(gameId, `${comment.username}: ${comment.comment}`);
+  };
+
+  const onChange = (e) => {
+    setComment((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   return (
     <section id="game-details">
@@ -16,9 +34,7 @@ export const GameDetails = ({ games }) => {
           <span className="levels">MaxLevel: {game.maxLevel}</span>
           <p className="type">{game.category}</p>
         </div>
-        <p className="text">
-          {game.summary}
-        </p>
+        <p className="text">{game.summary}</p>
         {/* Bonus ( for Guests and Users ) */}
         <div className="details-comments">
           <h2>Comments:</h2>
@@ -48,17 +64,21 @@ export const GameDetails = ({ games }) => {
       {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
       <article className="create-comment">
         <label>Add new comment:</label>
-        <form className="form">
+        <form className="form" onSubmit={addCommentHandler}>
+          <input
+            type="text"
+            name="username"
+            placeholder="John Doe"
+            onChange={onChange}
+            value={comment.username}
+          />
           <textarea
             name="comment"
             placeholder="Comment......"
-            defaultValue={""}
+            onChange={onChange}
+            value={comment.comment}
           />
-          <input
-            className="btn submit"
-            type="submit"
-            defaultValue="Add Comment"
-          />
+          <input className="btn submit" type="submit" value="Add Comment" />
         </form>
       </article>
     </section>
