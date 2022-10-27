@@ -13,6 +13,7 @@ import { Catalogue } from "./Components/Catalogue/Catalogue";
 
  
 import "./App.css";
+import { GameDetails } from "./Components/GameDetails/GameDetails";
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home games={games} />} />
           <Route path="/catalogue" element={<Catalogue games={games} />} />
+          <Route path="/catalogue/:gameId" element={<GameDetails />} />
           <Route path="/create" element={<CreateGame />} />
           <Route path="/edit" element={<EditGame />} />
           <Route path="/login" element={<Login />} />
