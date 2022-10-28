@@ -1,4 +1,4 @@
-export const Register = () => {
+const Register = () => {
   return (
     <section id="register-page" className="content auth">
       <form id="register">
@@ -31,3 +31,6 @@ export const Register = () => {
     </section>
   );
 };
+
+// In order for the lazy loading to work the component needs to be exported as default !
+export default Register;
