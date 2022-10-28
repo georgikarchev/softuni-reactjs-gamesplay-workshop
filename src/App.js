@@ -28,7 +28,7 @@ function App() {
       // immutable !!!
       return [
         ...state.filter( x => x._id !== gameId),
-        { ...game, comments: comments }
+        { ...game, comments },
       ]
     } )
   }
