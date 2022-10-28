@@ -50,9 +50,9 @@ export const GameDetails = ({ games, addComment }) => {
                 );
               })
             }
-            {!game.comments || !game.comments.length  && (
+            {!game.comments || !game.comments.length  && 
               <p className="no-comment">No comments.</p>
-            )}
+            }
           </ul>
         </div>
         {/* Edit/Delete buttons ( Only for creator of this game )  */}
