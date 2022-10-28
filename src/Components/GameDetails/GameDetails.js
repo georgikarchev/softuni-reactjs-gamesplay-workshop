@@ -8,6 +8,11 @@ export const GameDetails = ({ games, addComment }) => {
     comment: "",
   });
 
+  const [error, setError] = useState({
+    username: '',
+    comment: ''
+  });
+
   // The better way here is to make a get request to the server and get the game information
   const game = games.find((x) => x._id == gameId);
 
@@ -24,6 +29,23 @@ export const GameDetails = ({ games, addComment }) => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const validateUsername = (e) => {
+    const value = e.target.value;
+    let errorMessage = '';
+
+    if ( value.length < 4 ) {
+      errorMessage = `Username can't be that short`;
+    } else if ( value.length > 10 ) {
+      errorMessage = `Username can't be that long`;
+    }
+    
+    setError(state => ({
+      ...state,
+      [e.target.name] : errorMessage
+    }));
+
+  } 
 
   return (
     <section id="game-details">
@@ -70,11 +92,15 @@ export const GameDetails = ({ games, addComment }) => {
       <article className="create-comment">
         <label>Add new comment:</label>
         <form className="form" onSubmit={addCommentHandler}>
+          {error.username && 
+            <div style={{color: 'red'}}>{error.username}</div>
+          }
           <input
             type="text"
             name="username"
             placeholder="John Doe"
             onChange={onChange}
+            onBlur={validateUsername}
             value={comment.username}
           />
           <textarea
