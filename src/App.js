@@ -1,5 +1,7 @@
-import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import uniqid from 'uniqid';
+
 import * as gameService from "./Services/gameService";
 
 import Home from "./Components/Home";
@@ -18,6 +20,7 @@ import { GameDetails } from "./Components/GameDetails/GameDetails";
 function App() {
 
   const [ games, setGames ] = useState([]);
+  const navigate = useNavigate();
 
   const addComment = ( gameId, comment ) => {
     setGames( state => {
@@ -31,6 +34,19 @@ function App() {
         { ...game, comments },
       ]
     } )
+  }
+
+  const addGameHandler = (gameData) => {
+    setGames( state => {
+      return [
+        ...state,
+        {
+          ...gameData,
+          _id: uniqid(),
+        }
+      ]
+    });
+    navigate('/catalogue');
   }
 
   useEffect( () => {
@@ -51,7 +67,7 @@ function App() {
           <Route path="/" element={<Home games={games} />} />
           <Route path="/catalogue" element={<Catalogue games={games} />} />
           <Route path="/catalogue/:gameId" element={<GameDetails games={games} addComment={addComment} />} />
-          <Route path="/create" element={<CreateGame />} />
+          <Route path="/create" element={<CreateGame addGameHandler={addGameHandler} />} />
           <Route path="/edit" element={<EditGame />} />
           <Route path="/login" element={<Login />} />
           {/* <Route path="/logout" element={<Logout />} /> */}
